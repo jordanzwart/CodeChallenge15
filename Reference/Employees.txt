@@ -1,3 +1,4 @@
-jordan,25,Pizza
-vince,26,Tacos
-James,20,chicken
+
+Jack,40,Corn
+Sarah,32,Apples
+JImmy,20,Beer

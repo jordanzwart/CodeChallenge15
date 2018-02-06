@@ -64,23 +64,11 @@ public class CodeChallenge {
 	
 	}
 	public static void writeToFile(String dirString, String fileString){
-		Employees jordan = new Employees("jordan", 25, "Pizza");
-		Employees vince = new Employees("vince",26,"Tacos");
+		//Employees jordan = new Employees("jordan", 25, "Pizza");
+		//Employees vince = new Employees("vince",26,"Tacos");
 		Employees newEmploy;
 		
 		int yesNo;
-		do {
-			Scanner scan = new Scanner(System.in);
-			System.out.println("Enter name:");
-			String name = scan.next();
-			System.out.println("Enter age:");
-			int age = scan.nextInt();
-			System.out.println("Enter Favorite food:");
-			String favFood = scan.next();
-			newEmploy = new Employees(name, age, favFood);
-			System.out.println("Enter new Employee? Yes(1) or No(2)");
-			yesNo = scan.nextInt();
-		} while (yesNo == 1);
 		
 		Path writeFile = Paths.get(dirString, fileString);
 		
@@ -89,9 +77,21 @@ public class CodeChallenge {
 		try {
 			PrintWriter printOut = new PrintWriter(new FileOutputStream(file,true));//this will appended the files each time
 			
-			printOut.println(jordan);
-			printOut.println(vince);
-			printOut.println(newEmploy);
+			//printOut.println(jordan);
+			//printOut.println(vince);
+			do {
+				Scanner scan = new Scanner(System.in);
+				System.out.println("Enter name:");
+				String name = scan.next();
+				System.out.println("Enter age:");
+				int age = scan.nextInt();
+				System.out.println("Enter Favorite food:");
+				String favFood = scan.next();
+				newEmploy = new Employees(name, age, favFood);
+				printOut.println(newEmploy);
+				System.out.println("Enter new Employee? Yes(1) or No(2)");
+				yesNo = scan.nextInt();
+			} while (yesNo == 1);
 			printOut.close();//closing flushes out data and closes the object(PrintWriter)
 		} catch (FileNotFoundException e) {
 			

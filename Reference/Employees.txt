@@ -1,4 +1,3 @@
-
 Jack,40,Corn
 Sarah,32,Apples
 JImmy,20,Beer

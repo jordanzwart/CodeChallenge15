@@ -25,12 +25,36 @@ import java.util.Scanner;
 public class CodeChallenge {
 
 	public static void main(String[] args) {
-		ArrayList<String> staff = new ArrayList<String>();
+		Scanner scan = new Scanner(System.in);
+		ArrayList<Employees> staff = new ArrayList<Employees>();
+		String letter = "y";
 
 		createDirectory("Reference");
 		createFile("Reference", "Employees.txt");
 		writeToFile("Reference", "Employees.txt");
-		readFromFile("Reference", "Employees.txt");
+		staff = readFromFile("Reference", "Employees.txt");
+		
+//		System.out.println(staff);
+		int i = 0;
+		while (letter.equalsIgnoreCase("y")) {
+			for (i = 0; i < staff.size(); i++) {
+				Employees person = staff.get(i);
+				System.out.println(i + 1 + ". " + person.getName());
+			}
+			System.out.println("Which employee would you like to learn more about?:");
+			int choice = scan.nextInt();
+			System.out.println("Name: " + staff.get(choice - 1).getName());
+			System.out.println("Age:" + staff.get(choice - 1).getAge());
+			System.out.println("Favorite Food: "+ staff.get(choice - 1).getFavoriteFood());
+			letter = Validator.getString(scan, "Would you like to learn about another staff member?(Y/N)");
+		}
+		System.out.println("Thank you and goodbye.");
+		
+			
+		
+		
+		
+		
 
 	}// end of main
 
@@ -86,8 +110,7 @@ public class CodeChallenge {
 			PrintWriter printOut = new PrintWriter(new FileOutputStream(file,
 					true));// this will appended the files each time
 
-			// printOut.println(jordan);
-			// printOut.println(vince);
+
 			do {
 				Scanner scan = new Scanner(System.in);
 				System.out.println("Enter new Employee? Yes(1) or No(2)");
@@ -115,13 +138,10 @@ public class CodeChallenge {
 
 	}
 
-	public static void readFromFile(String dirString, String filePath) {
-		Path readFile = Paths.get("Reference/Employees.txt");// the hard coded
-																// value can
-																// changed to
-																// use the
-																// method
-																// parameters
+	public static ArrayList<Employees> readFromFile(String dirString, String filePath) {
+		Path readFile = Paths.get("Reference/Employees.txt");// the hard coded changed to use the method parameters
+		ArrayList<Employees> staff = new ArrayList<Employees>();														// value can
+		
 
 		File file = readFile.toFile();
 
@@ -133,8 +153,11 @@ public class CodeChallenge {
 			BufferedReader reader = new BufferedReader(fr);
 			String line = reader.readLine();
 			while (line != null) {
-				System.out.println(line);
+				//System.out.println(line);
+				String split[] = line.split(",");
+				staff.add(new Employees(split[0], Integer.parseInt(split[1]), split[2]));
 				line = reader.readLine();
+				
 			}
 			reader.close();// this flushes the buffer and closes it
 
@@ -144,7 +167,7 @@ public class CodeChallenge {
 			System.out.println("Somthing went wrong with this");
 			e.printStackTrace();
 		}
-
+		return staff; 
 	}
 
 }// end
